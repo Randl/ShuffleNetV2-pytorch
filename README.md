@@ -16,7 +16,7 @@ Use the model defined in `model.py` to run ImageNet example:
 python imagenet.py --dataroot "/path/to/imagenet/"
 ```
 
-To run continue training from checkpoint
+To continue training from checkpoint
 ```bash
 python imagenet.py --dataroot "/path/to/imagenet/" --resume "/path/to/checkpoint/folder"
 ```

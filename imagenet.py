@@ -59,9 +59,8 @@ parser.add_argument('--log-interval', type=int, default=100, metavar='N', help='
 parser.add_argument('--seed', type=int, default=None, metavar='S', help='random seed (default: random)')
 
 # Architecture
-parser.add_argument('--scaling', type=float, default=1, metavar='SC', help='Scaling of MobileNet (default x1).')
-parser.add_argument('--input-size', type=int, default=224, metavar='I',
-                    help='Input size of MobileNet, multiple of 32 (default 224).')
+parser.add_argument('--scaling', type=float, default=1, metavar='SC', help='Scaling of ShuffleNet (default x1).')
+parser.add_argument('--input-size', type=int, default=224, metavar='I', help='Input size of ShuffleNet.')
 parser.add_argument('--c-tag', type=float, default=0.5, help="c' value")
 parser.add_argument('--SE', dest='SE', action='store_true', help='Use SE modules')
 parser.add_argument('--residual', dest='residual', action='store_true', help='Just residuals')
@@ -181,12 +180,10 @@ def main():
 
     claimed_acc1 = None
     claimed_acc5 = None
-    if args.input_size in claimed_acc_top1:
-        if args.scaling in claimed_acc_top1[args.input_size]:
-            claimed_acc1 = claimed_acc_top1[args.input_size][args.scaling]
-            claimed_acc5 = claimed_acc_top5[args.input_size][args.scaling]
-            csv_logger.write_text(
-                'Claimed accuracies are: {:.2f}% top-1, {:.2f}% top-5'.format(claimed_acc1 * 100., claimed_acc5 * 100.))
+    if args.SE in claimed_acc_top1:
+        if args.scaling in claimed_acc_top1[args.SE]:
+            claimed_acc1 = 1 - claimed_acc_top1[args.SE][args.scaling]
+            csv_logger.write_text('Claimed accuracy is {:.2f}% top-1'.format(claimed_acc1 * 100.))
     train_network(args.start_epoch, args.epochs, scheduler, model, train_loader, val_loader, optimizer, criterion,
                   device, dtype, args.batch_size, args.log_interval, csv_logger, save_path, claimed_acc1, claimed_acc5,
                   best_test)
