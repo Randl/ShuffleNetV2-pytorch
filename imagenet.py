@@ -20,7 +20,7 @@ from logger import CsvLogger
 from model import ShuffleNetV2
 from run import train, test, save_checkpoint, find_bounds_clr
 
-parser = argparse.ArgumentParser(description='MobileNetv2 training with PyTorch')
+parser = argparse.ArgumentParser(description='ShuffleNetv2 training with PyTorch')
 parser.add_argument('--dataroot', required=True, metavar='PATH',
                     help='Path to ImageNet train and val folders, preprocessed as described in '
                          'https://github.com/facebook/fb.resnet.torch/blob/master/INSTALL.md#download-the-imagenet-dataset')

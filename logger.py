@@ -51,7 +51,7 @@ class CsvLogger:
         if print_t:
             print(text)
 
-    def plot_progress_errk(self, claimed_acc=None, title='MobileNetv2', k=1):
+    def plot_progress_errk(self, claimed_acc=None, title='ShuffleNetv2', k=1):
         tr_str = 'train_error{}'.format(k)
         val_str = 'val_error{}'.format(k)
         plt.figure(figsize=(9, 8), dpi=300)
@@ -70,7 +70,7 @@ class CsvLogger:
         plt.xlim(0, len(self.data[tr_str]) + 1)
         plt.savefig(os.path.join(self.log_path, 'top{}.png'.format(k)))
 
-    def plot_progress_loss(self, title='MobileNetv2'):
+    def plot_progress_loss(self, title='ShuffleNetv2'):
         plt.figure(figsize=(9, 8), dpi=300)
         plt.plot(self.data['train_loss'], label='Training')
         plt.plot(self.data['val_loss'], label='Validation')
@@ -81,7 +81,7 @@ class CsvLogger:
         plt.xlim(0, len(self.data['train_loss']) + 1)
         plt.savefig(os.path.join(self.log_path, 'loss.png'))
 
-    def plot_progress(self, claimed_acc1=None, claimed_acc5=None, title='MobileNetv2'):
+    def plot_progress(self, claimed_acc1=None, claimed_acc5=None, title='ShuffleNetv2'):
         self.plot_progress_errk(claimed_acc1, title, 1)
         self.plot_progress_errk(claimed_acc5, title, 5)
         self.plot_progress_loss(title)
